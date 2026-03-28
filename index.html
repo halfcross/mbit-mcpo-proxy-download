@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MCPBehindIT — Install (macOS)</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --fg: #111;
+        --muted: #5a5a5a;
+        --border: #ccc;
+        --cmd-bg: #0d1117;
+        --cmd-fg: #e6edf3;
+        --accent: #238636;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #f0f0f0;
+          --muted: #9a9a9a;
+          --border: #3d444d;
+          --cmd-bg: #161b22;
+          --cmd-fg: #e6edf3;
+        }
+        body {
+          background: #0d1117;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        color: var(--fg);
+      }
+      .wrap {
+        width: 100%;
+        max-width: min(100%, 52rem);
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin: 0 0 0.35rem;
+        letter-spacing: -0.02em;
+      }
+      .sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+        line-height: 1.45;
+      }
+      .label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .cmd {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        padding: 1rem 1.1rem;
+        background: var(--cmd-bg);
+        color: var(--cmd-fg);
+        border: 2px solid var(--accent);
+        border-radius: 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: clamp(0.68rem, 2.5vw, 0.88rem);
+        line-height: 1.5;
+        text-align: left;
+        white-space: pre;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        user-select: all;
+        cursor: text;
+      }
+      .hint {
+        margin-top: 0.85rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      details {
+        margin-top: 2rem;
+        text-align: left;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0 0.9rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      summary {
+        cursor: pointer;
+        padding: 0.65rem 0;
+        font-weight: 600;
+        color: var(--fg);
+        list-style: none;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary::after {
+        content: " ▼";
+        font-size: 0.7em;
+        opacity: 0.6;
+      }
+      details[open] summary::after {
+        content: " ▲";
+      }
+      .more {
+        padding-bottom: 0.85rem;
+        border-top: 1px solid var(--border);
+        line-height: 1.5;
+      }
+      .more ol {
+        margin: 0.5rem 0 0;
+        padding-left: 1.2rem;
+      }
+      .more pre {
+        margin: 0.5rem 0 0;
+        padding: 0.5rem 0.65rem;
+        background: var(--cmd-bg);
+        color: var(--cmd-fg);
+        border-radius: 6px;
+        font-size: 0.78rem;
+        overflow-x: auto;
+      }
+      .more a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Install MCPBehindIT</h1>
+      <p class="sub">macOS · Requires Docker Desktop when you use the app · License key is entered inside the app</p>
+
+      <div class="label">Terminal — copy and paste</div>
+      <pre class="cmd" tabindex="0" aria-label="Install command">curl -fsSL https://halfcross.github.io/mbit-mcpo-proxy-download/install.sh | bash</pre>
+      <p class="hint">Select the line above, paste into Terminal, press Return.</p>
+
+      <details>
+        <summary>Manual install (download DMG yourself)</summary>
+        <div class="more">
+          <p style="margin-top: 0.65rem">
+            <a href="https://github.com/halfcross/mbit-mcpo-proxy-download/releases">Download the latest .dmg</a>
+            from this repo’s Releases. Open it, drag <strong>MCPBehindIT</strong> to <strong>Applications</strong>, then run:
+          </p>
+          <pre>xattr -cr "/Applications/MCPBehindIT.app"</pre>
+          <p style="margin-bottom: 0">
+            Ad-hoc signed builds may show a “damaged” warning until quarantine is cleared. Notarized builds are not
+            distributed here.
+          </p>
+        </div>
+      </details>
+    </div>
+  </body>
+</html>
