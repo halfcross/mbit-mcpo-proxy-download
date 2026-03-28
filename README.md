@@ -3,8 +3,8 @@
 Public **download & install** site for **MCPBehindIT** (macOS), hosted at  
 **https://halfcross.github.io/mbit-mcpo-proxy-download/** (after GitHub Pages is enabled).
 
-- **App source & DMG releases:** [halfcross/mbit-mcpo-proxy](https://github.com/halfcross/mbit-mcpo-proxy) (no `-download` suffix).
-- This repo only hosts `index.html`, `install.sh`, and `.nojekyll`. The installer pulls the **latest `.dmg`** from the app repo’s GitHub Releases.
+- **App source (may be private):** [halfcross/mbit-mcpo-proxy](https://github.com/halfcross/mbit-mcpo-proxy). CI builds the DMG there, then **uploads the same DMG to public Releases here** so anonymous installs work.
+- This repo hosts `index.html`, `install.sh`, `.nojekyll`, and **release assets** (site ZIP + **DMG**).
 
 Inspired by [mcp-telekom-proxy-download](https://github.com/Tim-Ganther/mcp-telekom-proxy-download), without ZIP/password; licensing is in the app.
 
@@ -49,10 +49,10 @@ Repo **Settings → Pages → Build and deployment:**
 ### 3. Confirm the main app repo has a public Release with a `.dmg`
 
 The installer calls  
-`https://api.github.com/repos/halfcross/mbit-mcpo-proxy/releases/latest`  
-and expects an asset whose name ends in **`.dmg`**.
+`https://api.github.com/repos/halfcross/mbit-mcpo-proxy-download/releases/latest`  
+and expects an asset whose name ends in **`.dmg`** (published by CI from the private app build).
 
-If there is no release yet, tag and push on **mbit-mcpo-proxy** (CI builds the DMG), or upload a DMG manually to Releases.
+If there is no release yet, tag and push on **mbit-mcpo-proxy** so CI runs; the public download release is created in the second job.
 
 ### 4. Optional: executable bit for `install.sh`
 
@@ -68,7 +68,7 @@ git update-index --chmod=+x install.sh   # if you use git to track mode
 
 ```bash
 curl -fsSL https://halfcross.github.io/mbit-mcpo-proxy-download/install.sh | \
-  DMG_URL='https://github.com/halfcross/mbit-mcpo-proxy/releases/download/v2.0.0/MCPBehindIT-2.0.0.dmg' bash
+  DMG_URL='https://github.com/halfcross/mbit-mcpo-proxy-download/releases/download/v2.0.0/MCPBehindIT-2.0.0.dmg' bash
 ```
 
 Use the exact **browser_download_url** from the release asset.
@@ -78,5 +78,11 @@ Use the exact **browser_download_url** from the release asset.
 | File | Purpose |
 |------|---------|
 | `index.html` | English landing page |
-| `install.sh` | One-line installer (default `MBIT_GITHUB_REPO=halfcross/mbit-mcpo-proxy`) |
-| `.nojekyll` | Static Pages serving |
+| `install.sh` | One-line installer (default `DMG_RELEASE_REPO=halfcross/mbit-mcpo-proxy-download`) |
+| `.nojekyll` | Tells GitHub Pages **not** to run Jekyll, so files are served as plain static assets (needed for `install.sh`, dotfiles, and no unwanted Markdown/HTML processing). |
+
+### DMG location (public vs private app repo)
+
+The **app repository may be private**. Anonymous `curl` to `api.github.com` for `/releases/latest` **does not work** for private repos, so **`install.sh` loads the `.dmg` from this public repo’s Releases** (`DMG_RELEASE_REPO`, default `halfcross/mbit-mcpo-proxy-download`).
+
+CI in the **private** app repo builds the DMG, uploads it to the private release, then **sync-download-site** downloads the DMG **artifact** and attaches it to a **public** release here (same semver tag). Order: `package-mac` → `sync-download-site`.

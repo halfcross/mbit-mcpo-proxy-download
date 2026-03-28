@@ -4,14 +4,16 @@
 #
 # Usage:
 #   curl -fsSL https://halfcross.github.io/mbit-mcpo-proxy-download/install.sh | bash
-#   MBIT_GITHUB_REPO=other-org/mbit-mcpo-proxy curl -fsSL … | bash
+#   DMG_RELEASE_REPO=org/mbit-mcpo-proxy-download curl -fsSL … | bash
+#
+# The DMG must live on a *public* repo’s Releases (CI copies it from the private app build).
 #
 set -euo pipefail
 
 APP_NAME="MCPBehindIT.app"
 
-# Default: app repo that publishes *.dmg on GitHub Releases (override if you fork).
-MBIT_GITHUB_REPO="${MBIT_GITHUB_REPO:-halfcross/mbit-mcpo-proxy}"
+# Public repo whose latest Release includes a .dmg (anonymous GitHub API). Not the private app repo.
+DMG_RELEASE_REPO="${DMG_RELEASE_REPO:-halfcross/mbit-mcpo-proxy-download}"
 
 # Optional: direct DMG URL (skips GitHub API). Example: exported asset URL from a release.
 DMG_URL_OVERRIDE="${DMG_URL:-}"
@@ -38,10 +40,10 @@ if [[ -n "$DMG_URL_OVERRIDE" ]]; then
   DMG_URL="$DMG_URL_OVERRIDE"
   echo " Using DMG_URL: $DMG_URL"
 else
-  API_URL="https://api.github.com/repos/${MBIT_GITHUB_REPO}/releases/latest"
-  echo " Resolving latest DMG from: $API_URL"
+  API_URL="https://api.github.com/repos/${DMG_RELEASE_REPO}/releases/latest"
+  echo " Resolving latest DMG from (public repo): $API_URL"
   JSON=$(curl -fsSL -H "Accept: application/vnd.github+json" "$API_URL") || {
-    echo " Error: Could not fetch release info. Check MBIT_GITHUB_REPO and network." >&2
+    echo " Error: Could not fetch release info. Check DMG_RELEASE_REPO and network." >&2
     exit 1
   }
   DMG_URL=$(echo "$JSON" | /usr/bin/python3 -c "

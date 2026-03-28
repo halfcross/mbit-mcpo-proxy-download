@@ -3,124 +3,162 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MCPBehindIT – Download &amp; install (macOS)</title>
+    <title>MCPBehindIT — Install (macOS)</title>
     <style>
       :root {
         color-scheme: light dark;
-        --fg: #1a1a1a;
-        --muted: #555;
+        --fg: #111;
+        --muted: #5a5a5a;
         --border: #ccc;
-        --code-bg: #f4f4f4;
+        --cmd-bg: #0d1117;
+        --cmd-fg: #e6edf3;
+        --accent: #238636;
       }
       @media (prefers-color-scheme: dark) {
         :root {
-          --fg: #eee;
-          --muted: #aaa;
-          --border: #444;
-          --code-bg: #2a2a2a;
+          --fg: #f0f0f0;
+          --muted: #9a9a9a;
+          --border: #3d444d;
+          --cmd-bg: #161b22;
+          --cmd-fg: #e6edf3;
         }
         body {
-          background: #121212;
+          background: #0d1117;
         }
       }
+      * {
+        box-sizing: border-box;
+      }
       body {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        line-height: 1.55;
-        max-width: 44rem;
-        margin: 0 auto;
-        padding: 2rem 1.25rem;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
         color: var(--fg);
       }
+      .wrap {
+        width: 100%;
+        max-width: 36rem;
+        text-align: center;
+      }
       h1 {
-        font-size: 1.5rem;
-        margin-top: 0;
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin: 0 0 0.35rem;
+        letter-spacing: -0.02em;
       }
-      h2 {
-        font-size: 1.1rem;
-        margin-top: 2rem;
+      .sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+        line-height: 1.45;
       }
-      p,
-      li {
+      .label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .cmd {
+        margin: 0;
+        padding: 1rem 1.1rem;
+        background: var(--cmd-bg);
+        color: var(--cmd-fg);
+        border: 2px solid var(--accent);
+        border-radius: 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: clamp(0.72rem, 2.8vw, 0.88rem);
+        line-height: 1.5;
+        text-align: left;
+        overflow-x: auto;
+        word-break: break-all;
+        user-select: all;
+        cursor: text;
+      }
+      .hint {
+        margin-top: 0.85rem;
+        font-size: 0.8rem;
         color: var(--muted);
       }
-      code,
-      pre {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 0.88rem;
-      }
-      pre {
-        background: var(--code-bg);
+      details {
+        margin-top: 2rem;
+        text-align: left;
         border: 1px solid var(--border);
         border-radius: 8px;
-        padding: 0.85rem 1rem;
-        overflow-x: auto;
-        white-space: pre-wrap;
-        word-break: break-all;
+        padding: 0 0.9rem;
+        font-size: 0.85rem;
+        color: var(--muted);
       }
-      .note {
-        border-left: 3px solid #888;
-        padding-left: 1rem;
-        margin: 1rem 0;
+      summary {
+        cursor: pointer;
+        padding: 0.65rem 0;
+        font-weight: 600;
+        color: var(--fg);
+        list-style: none;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary::after {
+        content: " ▼";
+        font-size: 0.7em;
+        opacity: 0.6;
+      }
+      details[open] summary::after {
+        content: " ▲";
+      }
+      .more {
+        padding-bottom: 0.85rem;
+        border-top: 1px solid var(--border);
+        line-height: 1.5;
+      }
+      .more ol {
+        margin: 0.5rem 0 0;
+        padding-left: 1.2rem;
+      }
+      .more pre {
+        margin: 0.5rem 0 0;
+        padding: 0.5rem 0.65rem;
+        background: var(--cmd-bg);
+        color: var(--cmd-fg);
+        border-radius: 6px;
+        font-size: 0.78rem;
+        overflow-x: auto;
+      }
+      .more a {
+        color: inherit;
       }
     </style>
   </head>
   <body>
-    <h1>MCPBehindIT (macOS)</h1>
-    <p>
-      <strong>MCPBehindIT</strong> is a desktop app that runs the
-      <a href="https://github.com/open-webui/mcpo">mcpo</a> MCP gateway in
-      <strong>Docker</strong> and helps you manage MCP server definitions, imports, logs, and
-      settings. You need <strong>Docker Desktop</strong> running when you use the gateway.
-    </p>
-    <p>
-      After install, the app may ask for your <strong>MindBehind license key</strong> (online
-      validation). There is no password on the installer itself.
-    </p>
+    <div class="wrap">
+      <h1>Install MCPBehindIT</h1>
+      <p class="sub">macOS · Requires Docker Desktop when you use the app · License key is entered inside the app</p>
 
-    <h2>One-line install (recommended)</h2>
-    <p>
-      Run in Terminal (downloads the latest <code>.dmg</code> from
-      <a href="https://github.com/halfcross/mbit-mcpo-proxy/releases">halfcross/mbit-mcpo-proxy</a>
-      releases):
-    </p>
-    <pre><code>curl -fsSL https://halfcross.github.io/mbit-mcpo-proxy-download/install.sh | bash</code></pre>
-    <p>
-      To use another fork, set <code>MBIT_GITHUB_REPO</code>, e.g.
-      <code>MBIT_GITHUB_REPO=myorg/mbit-mcpo-proxy</code> before <code>bash</code>.
-    </p>
-    <p class="note">
-      The script downloads the <strong>latest</strong> <code>.dmg</code> from that repo’s GitHub
-      Releases, copies <code>MCPBehindIT.app</code> to <code>/Applications</code>, and runs
-      <code>xattr -cr</code> so macOS does not block the app with a misleading “damaged” message
-      after a browser download.
-    </p>
+      <div class="label">Terminal — copy and paste</div>
+      <pre class="cmd" tabindex="0" aria-label="Install command">curl -fsSL https://halfcross.github.io/mbit-mcpo-proxy-download/install.sh | bash</pre>
+      <p class="hint">Select the line above, paste into Terminal, press Return.</p>
 
-    <h2>Manual install</h2>
-    <ol>
-      <li>
-        Open the
-        <a href="https://github.com/halfcross/mbit-mcpo-proxy/releases"><strong>Releases</strong></a>
-        page of <strong>mbit-mcpo-proxy</strong>.
-      </li>
-      <li>Download the <code>.dmg</code> for your version.</li>
-      <li>Open the DMG and drag <strong>MCPBehindIT</strong> into <strong>Applications</strong>.</li>
-      <li>
-        In Terminal, clear quarantine (adjust path if needed):
-        <pre><code>xattr -cr "/Applications/MCPBehindIT.app"</code></pre>
-      </li>
-      <li>Launch the app from Applications or Spotlight.</li>
-    </ol>
-
-    <h2>Security note</h2>
-    <p>
-      Builds may be <strong>ad-hoc signed</strong> and are <strong>not</strong> Apple-notarized.
-      Clearing quarantine is normal for in-house distribution. For stricter deployment, use a
-      Developer ID certificate and notarization in your build pipeline.
-    </p>
-
-    <p style="margin-top: 2rem; font-size: 0.85rem">
-      This page is served from the <strong>mbit-mcpo-proxy-download</strong> repository (GitHub
-      Pages). Application source and releases live in the main product repository.
-    </p>
+      <details>
+        <summary>Manual install (download DMG yourself)</summary>
+        <div class="more">
+          <p style="margin-top: 0.65rem">
+            <a href="https://github.com/halfcross/mbit-mcpo-proxy-download/releases">Download the latest .dmg</a>
+            from this repo’s Releases. Open it, drag <strong>MCPBehindIT</strong> to <strong>Applications</strong>, then run:
+          </p>
+          <pre>xattr -cr "/Applications/MCPBehindIT.app"</pre>
+          <p style="margin-bottom: 0">
+            Ad-hoc signed builds may show a “damaged” warning until quarantine is cleared. Notarized builds are not
+            distributed here.
+          </p>
+        </div>
+      </details>
+    </div>
   </body>
 </html>
