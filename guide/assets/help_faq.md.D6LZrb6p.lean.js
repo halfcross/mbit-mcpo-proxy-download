@@ -1,0 +1,1 @@
+import{_ as o,o as t,c as r,a2 as a}from"./chunks/framework.Desnpdez.js";const g=JSON.parse('{"title":"FAQ","description":"","frontmatter":{},"headers":[],"relativePath":"help/faq.md","filePath":"help/faq.md"}'),s={name:"help/faq.md"};function n(i,e,d,l,h,p){return t(),r("div",null,[...e[0]||(e[0]=[a("",29)])])}const u=o(s,[["render",n]]);export{g as __pageData,u as default};
