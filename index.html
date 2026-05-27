@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MindBehindAI — Download</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --fg: #111;
+        --muted: #5a5a5a;
+        --border: #ccc;
+        --cmd-bg: #0d1117;
+        --cmd-fg: #e6edf3;
+        --accent: #238636;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #f0f0f0;
+          --muted: #9a9a9a;
+          --border: #3d444d;
+          --cmd-bg: #161b22;
+          --cmd-fg: #e6edf3;
+        }
+        body {
+          background: #0d1117;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        color: var(--fg);
+      }
+      .wrap {
+        width: 100%;
+        max-width: min(100%, 52rem);
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin: 0 0 0.35rem;
+        letter-spacing: -0.02em;
+      }
+      .sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+        line-height: 1.45;
+      }
+      .platform {
+        text-align: left;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.1rem 1.2rem;
+        margin-bottom: 1.25rem;
+      }
+      .platform h2 {
+        font-size: 1.05rem;
+        margin: 0 0 0.35rem;
+      }
+      .platform p {
+        font-size: 0.88rem;
+        color: var(--muted);
+        margin: 0 0 0.85rem;
+        line-height: 1.45;
+      }
+      .label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .cmd {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        padding: 1rem 1.1rem;
+        background: var(--cmd-bg);
+        color: var(--cmd-fg);
+        border: 2px solid var(--accent);
+        border-radius: 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: clamp(0.68rem, 2.5vw, 0.88rem);
+        line-height: 1.5;
+        text-align: left;
+        white-space: pre;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        user-select: all;
+        cursor: text;
+      }
+      .dl-btn {
+        display: inline-block;
+        margin: 0.35rem 0.5rem 0.35rem 0;
+        padding: 0.55rem 1rem;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .dl-btn:hover {
+        filter: brightness(1.08);
+      }
+      .hint {
+        margin-top: 0.85rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      details {
+        margin-top: 1rem;
+        text-align: left;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0 0.9rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      summary {
+        cursor: pointer;
+        padding: 0.65rem 0;
+        font-weight: 600;
+        color: var(--fg);
+        list-style: none;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary::after {
+        content: " ▼";
+        font-size: 0.7em;
+        opacity: 0.6;
+      }
+      details[open] summary::after {
+        content: " ▲";
+      }
+      .more {
+        padding-bottom: 0.85rem;
+        border-top: 1px solid var(--border);
+        line-height: 1.5;
+      }
+      .more pre {
+        margin: 0.5rem 0 0;
+        padding: 0.5rem 0.65rem;
+        background: var(--cmd-bg);
+        color: var(--cmd-fg);
+        border-radius: 6px;
+        font-size: 0.78rem;
+        overflow-x: auto;
+      }
+      .more a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Download MindBehindAI</h1>
+      <p class="sub">
+        Local assistant bridge (bundled runtime) · no Docker required for normal use · MindBehind license key in the app
+      </p>
+
+      <section class="platform" aria-labelledby="mac-heading">
+        <h2 id="mac-heading">macOS (Apple Silicon)</h2>
+        <p>
+          <strong>Recommended:</strong> run the one-line install in Terminal (downloads the <code>.dmg</code>,
+          copies <strong>MindBehindAI</strong> to <strong>Applications</strong>, clears quarantine). Intel Macs are
+          not supported in current releases.
+        </p>
+        <p style="margin-top: 0.85rem">Copy and paste into Terminal:</p>
+        <pre class="cmd" tabindex="0" aria-label="Install command">curl -fsSL https://halfcross.github.io/mbit-mcpo-proxy-download/install.sh | bash</pre>
+        <p>
+          <a
+            class="dl-btn"
+            href="https://github.com/halfcross/mbit-mcpo-proxy-download/releases/latest"
+            >Or download the .dmg only</a
+          >
+        </p>
+        <details>
+          <summary>Manual install + quarantine fix</summary>
+          <div class="more">
+            <p style="margin-top: 0.65rem">
+              Open the disk image, drag <strong>MindBehindAI</strong> to <strong>Applications</strong>. If macOS says the
+              app is damaged or cannot be opened:
+            </p>
+            <pre>APP="/Applications/MindBehindAI.app"
+find "$APP" \( -type f -o -type d \) -exec xattr -c {} + 2>/dev/null
+find "$APP" -type l -exec xattr -c -s {} + 2>/dev/null</pre>
+            <p style="margin-bottom: 0">
+              Plain <code>xattr -cr</code> can error on symlinks; use the commands above. See the
+              <a href="https://halfcross.github.io/mbit-mcpo-proxy-download/guide/help/troubleshooting.html#macos-quarantine"
+                >user guide</a
+              >.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <section class="platform" aria-labelledby="win-heading">
+        <h2 id="win-heading">Windows</h2>
+        <p>
+          <strong>Portable app</strong> — a single <code>.exe</code> file (no installer, no setup wizard). Download the build
+          for your PC, run it, and allow past SmartScreen if prompted (unsigned build).
+        </p>
+        <p>
+          <a
+            class="dl-btn"
+            href="https://github.com/halfcross/mbit-mcpo-proxy-download/releases/latest/download/MindBehindAI-5.3.1-portable-x64.exe"
+            >Download for Windows (64-bit)</a
+          >
+        </p>
+        <p class="hint" style="margin-bottom: 0">
+          Single portable <code>.exe</code> (Intel/AMD and Windows on ARM via x64 emulation). All assets:
+          <a href="https://github.com/halfcross/mbit-mcpo-proxy-download/releases">GitHub Releases</a>.
+        </p>
+      </section>
+
+      <p class="hint" style="margin-top: 1.2rem">
+        <a href="./guide/" style="color: var(--accent); text-decoration: none; font-weight: 600">User guide (English)</a>
+        — quick start, connections, Open WebUI, presets, help.
+      </p>
+    </div>
+  </body>
+</html>
